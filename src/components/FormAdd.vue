@@ -20,11 +20,9 @@
     </a-table>
 </template>
 <script lang="ts">
-import type { Rule } from 'ant-design-vue/es/form';
 import { defineComponent, reactive, ref, onMounted, Ref } from 'vue';
 import { useEmployeesStore } from '../stores/index';
 import { DataTable, Employees } from '../types'
-import type { FormInstance } from 'ant-design-vue';
 
 interface EmployeeInfo {
   id: string | number;
@@ -37,7 +35,7 @@ interface EmployeeInfo {
 export default defineComponent({
   setup() {
     const employeesStore = useEmployeesStore();
-    const formRef = ref<FormInstance>();
+    const formRef = ref();
     const employeeInfo = reactive<EmployeeInfo>({
       id: 0,
       name: '',
@@ -47,7 +45,7 @@ export default defineComponent({
     });
     const id = ref(0);
     const data: Ref<Array<DataTable>> = ref([]);
-    const rules: Record<string, Rule[]> = {
+    const rules: Record<string, any> = {
       name: [{ required: true, message: 'Please input name' }],
     };
     const layout = {

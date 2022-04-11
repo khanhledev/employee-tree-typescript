@@ -8,6 +8,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useEmployeesStore } from '../stores/index';
+import { Employees } from '../types'
 
 
 export default defineComponent({
@@ -22,8 +23,8 @@ export default defineComponent({
     const buildTree = (list: any) => {
       const map: any = {};
       const roots = [];
-      let node;
-      let i;
+      let node: Employees;
+      let i: number;
 
       for (i = 0; i < list.length; i++) {
         map[list[i].id] = i;
@@ -35,7 +36,7 @@ export default defineComponent({
         if (node.supervised_by && list[map[node.supervised_by]]) {
           list[map[node.supervised_by]].children.push(node);
         } else {
-          roots.push(node);
+          roots.push(node as never);
         }
       }
 
@@ -49,7 +50,7 @@ export default defineComponent({
         return;
       }
 
-      let tree = []
+      let tree: Array<Employees> = []
       if (!employee.supervised_by) {
         tree.push(employee);
       } else {

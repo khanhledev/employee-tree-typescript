@@ -69,9 +69,7 @@ export default defineComponent({
       dataIndex: 'supervised_by',
     }];
 
-    const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef, {
-      onValidate: (...args) => console.log(...args),
-    });
+    const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef);
 
     const openNotificationWithIcon = (type: string) => {
       notification[type]({
@@ -91,7 +89,7 @@ export default defineComponent({
       if (employees.value.length) {
         data.value = employees.value.map((employee: Employees) => {
           const supervisorName = getSupervisorNameById(employee.supervised_by);
-          return { key: employee.id, name: employee.name, supervised_by: supervisorName }
+          return ({ key: employee.id, name: employee.name, supervised_by: supervisorName } as DataTable)
         })
       }
     }

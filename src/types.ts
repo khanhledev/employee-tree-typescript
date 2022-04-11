@@ -18,6 +18,7 @@ export interface DataTable {
   key: string | number;
   id: string | number;
   name: string;
+  supervised_by?: string;
 }
 
 export interface AssignPayload {
